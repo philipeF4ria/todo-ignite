@@ -5,11 +5,12 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#1A1A1A',
     },
+    body: {
+        paddingHorizontal: 24,
+    },
     countersContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft: 24,
-        marginRight: 24,
         marginTop: 32,
         borderBottomWidth: 1,
         borderBottomColor: '#333333',
@@ -35,5 +36,9 @@ export const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
         color: '#D9D9D9',
+    },
+    emptyListContainer: {
+        alignItems: 'center',
+        marginTop: 48,
     },
 });
