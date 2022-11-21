@@ -2,14 +2,15 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: -30,
+        width: '100%',
+        paddingHorizontal: 24,
     },
     textInput: {
         backgroundColor: '#262626',
-        width: 300,
+        flex: 1,
         height: 54,
         borderRadius: 6,
         color: '#F2F2F2',
