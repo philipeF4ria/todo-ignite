@@ -7,6 +7,7 @@ import {
     FlatList
 } from 'react-native';
 import { useState } from 'react';
+import uuid from 'react-native-uuid';
 
 import { Task } from '../../components/Task';
 
@@ -27,7 +28,13 @@ export function Home() {
     const [taskName, setTaskName] = useState<string>('');
 
     function handleCreateTask() {
+        setTasks(prevState => [...prevState, {
+            id: uuid.v4().toString(),
+            name: taskName,
+            isFinished: false,
+        }]);
 
+        setTaskName('');
     }
 
     return (
@@ -40,9 +47,13 @@ export function Home() {
                     style={styles.textInput}
                     placeholder="Adicione uma nova tarefa"
                     placeholderTextColor='#808080'
+                    value={taskName}
                     onChangeText={setTaskName}
                 />
-                <TouchableOpacity style={styles.button} >
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={handleCreateTask}
+                >
                     <Image source={plus}/>
                 </TouchableOpacity>
             </View>
@@ -54,7 +65,7 @@ export function Home() {
                     <View style={styles.counter}>
                         <Text style={[styles.counterText, {color: '#4EA8DE'}]}>Criadas</Text>
                         <View style={styles.counterNumberContainer}>
-                            <Text style={styles.counterNumber}>0</Text>
+                            <Text style={styles.counterNumber}>{tasks.length}</Text>
                         </View>
                     </View>
                     <View style={styles.counter}>
