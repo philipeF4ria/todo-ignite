@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#262626',
         borderRadius: 8,
         padding: 12,
+        marginBottom: 8,
     },
     taskTextContainer: {
         marginLeft: 8,

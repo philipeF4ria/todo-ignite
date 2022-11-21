@@ -41,4 +41,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 48,
     },
+    emptyListText: {
+        color: '#808080',
+        lineHeight: 20,
+        fontSize: 14,
+    },
 });
