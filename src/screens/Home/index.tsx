@@ -1,11 +1,19 @@
-import { View, Text, Image, FlatList } from 'react-native';
+import { 
+    View, 
+    Text, 
+    Image, 
+    TextInput,
+    TouchableOpacity,
+    FlatList
+} from 'react-native';
 import { useState } from 'react';
 
-import { Header } from '../../components/Header';
 import { Task } from '../../components/Task';
 
 import { styles } from './styles';
 
+import logo from '../../../assets/images/logo/logo.png';
+import plus from '../../../assets/images/icons/plus.png';
 import clipboard from '../../../assets/images/icons/clipboard.png';
 
 type ITask = {
@@ -15,24 +23,34 @@ type ITask = {
 }
 
 export function Home() {
-    const [task, setTask] = useState<ITask[]>([
-        {
-            id: '1',
-            name: 'Estudar React Native',
-            isFinished: false,
-        },
-        {
-            id: '2',
-            name: 'Estudar NodeJS',
-            isFinished: false,
-        },
-    ]);
+    const [tasks, setTasks] = useState<ITask[]>([]);
+    const [taskName, setTaskName] = useState<string>('');
+
+    function handleCreateTask() {
+
+    }
 
     return (
         <View style={styles.container}>
-            <Header />
+            <View style={styles.header}>
+                <Image source={logo}/>
+            </View>
+            <View style={styles.form}>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Adicione uma nova tarefa"
+                    placeholderTextColor='#808080'
+                    onChangeText={setTaskName}
+                />
+                <TouchableOpacity style={styles.button} >
+                    <Image source={plus}/>
+                </TouchableOpacity>
+            </View>
             <View style={styles.body}>
-                <View style={styles.countersContainer}>
+                <View style={[
+                        styles.countersContainer, 
+                        tasks.length > 0 ? {borderBottomWidth: 0} : undefined
+                    ]}>
                     <View style={styles.counter}>
                         <Text style={[styles.counterText, {color: '#4EA8DE'}]}>Criadas</Text>
                         <View style={styles.counterNumberContainer}>
@@ -47,7 +65,7 @@ export function Home() {
                     </View>
                 </View>
                 <FlatList 
-                    data={task}
+                    data={tasks}
                     renderItem={({ item }) => (
                         <Task text={item.name}/>
                     )}
