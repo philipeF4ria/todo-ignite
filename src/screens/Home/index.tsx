@@ -20,7 +20,7 @@ import clipboard from '../../../assets/images/icons/clipboard.png';
 type ITask = {
     id: string;
     name: string;
-    isFinished: boolean;
+    isDone: boolean;
 }
 
 export function Home() {
@@ -31,10 +31,22 @@ export function Home() {
         setTasks(prevState => [...prevState, {
             id: uuid.v4().toString(),
             name: taskName,
-            isFinished: false,
+            isDone: false,
         }]);
 
         setTaskName('');
+    }
+   
+    function handleToggleTaskDone(id: string) {
+        const updateTask = tasks.map(task => {
+            if (task.id === id) {
+                task.isDone = !task.isDone;
+            }
+
+            return task;
+        });
+
+        setTasks([...updateTask]);
     }
 
     return (
@@ -78,7 +90,11 @@ export function Home() {
                 <FlatList 
                     data={tasks}
                     renderItem={({ item }) => (
-                        <Task text={item.name}/>
+                        <Task 
+                            text={item.name} 
+                            handleToggleTaskDone={() => handleToggleTaskDone(item.id)}
+                            isDone={item.isDone}
+                        />
                     )}
                     keyExtractor={item => item.id}
                     ListEmptyComponent={() => (
