@@ -27,6 +27,19 @@ type ITask = {
 export function Home() {
     const [tasks, setTasks] = useState<ITask[]>([]);
     const [taskName, setTaskName] = useState<string>('');
+    
+    const todoCount = tasks.reduce((accumulator, task) => {
+        if (task.isDone) {
+            accumulator.done++;
+        }
+
+        accumulator.total++;
+
+        return accumulator;
+    }, {
+        total: 0,
+        done: 0,
+    });
 
     function handleCreateTask() {
         setTasks(prevState => [...prevState, {
@@ -91,13 +104,13 @@ export function Home() {
                     <View style={styles.counter}>
                         <Text style={[styles.counterText, {color: '#4EA8DE'}]}>Criadas</Text>
                         <View style={styles.counterNumberContainer}>
-                            <Text style={styles.counterNumber}>{tasks.length}</Text>
+                            <Text style={styles.counterNumber}>{todoCount.total}</Text>
                         </View>
                     </View>
                     <View style={styles.counter}>
                         <Text style={[styles.counterText, {color: '#8284FA'}]}>Concluídas</Text>
                         <View style={styles.counterNumberContainer}>
-                            <Text style={styles.counterNumber}>0</Text>
+                            <Text style={styles.counterNumber}>{todoCount.done}</Text>
                         </View>
                     </View>
                 </View>
