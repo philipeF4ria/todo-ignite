@@ -52,15 +52,13 @@ export function Home() {
     }
    
     function handleToggleTaskDone(id: string) {
-        const updateTask = tasks.map(task => {
+        setTasks(prevState => prevState.map(task => {
             if (task.id === id) {
                 task.isDone = !task.isDone;
             }
 
             return task;
-        });
-
-        setTasks([...updateTask]);
+        }));
     }
 
     function handleRemoveTask(id: string, name: string) {
