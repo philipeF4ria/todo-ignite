@@ -4,7 +4,8 @@ import {
     Image, 
     TextInput,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Alert
 } from 'react-native';
 import { useState } from 'react';
 import uuid from 'react-native-uuid';
@@ -47,6 +48,19 @@ export function Home() {
         });
 
         setTasks([...updateTask]);
+    }
+
+    function handleRemoveTask(id: string, name: string) {
+        Alert.alert('Remover', `Remover a tarefa ${name}`, [
+            {
+                text: 'Sim',
+                onPress: () => setTasks(prevState => prevState.filter(task => task.id !== id)),
+            },
+            {
+                text: 'Não',
+                style: 'cancel',
+            },
+        ]);
     }
 
     return (
@@ -94,6 +108,7 @@ export function Home() {
                             text={item.name} 
                             handleToggleTaskDone={() => handleToggleTaskDone(item.id)}
                             isDone={item.isDone}
+                            handleRemoveTask={() => handleRemoveTask(item.id, item.name)}
                         />
                     )}
                     keyExtractor={item => item.id}

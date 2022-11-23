@@ -7,9 +7,15 @@ type ITaskProps = {
     text: string;
     isDone: boolean;
     handleToggleTaskDone: () => void;
+    handleRemoveTask: () => void;
 }
 
-export function Task({ text, isDone, handleToggleTaskDone }: ITaskProps) {
+export function Task({ 
+    text, 
+    isDone, 
+    handleToggleTaskDone,
+    handleRemoveTask,
+}: ITaskProps) {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={handleToggleTaskDone}>
@@ -25,7 +31,9 @@ export function Task({ text, isDone, handleToggleTaskDone }: ITaskProps) {
                     isDone === true ? {textDecorationLine: 'line-through'} : undefined
                 ]}>{text}</Text>
             </View>
-            <Trash color="#808080" size={24} style={styles.trashIcon}/>
+            <TouchableOpacity style={styles.trashIcon} onPress={handleRemoveTask}>
+                <Trash color="#808080" size={24} />
+            </TouchableOpacity>
         </View>
     );
 }
